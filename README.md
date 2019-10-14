@@ -75,11 +75,6 @@ int query()
 }
 ```
 
-## Caution
-when you use 
- stmt.bindstring(1, name);
-you cann't use a tempory string ,for example 
- stmt.bindstring(1, to_string(10)); this will produce error when run program
 
 
 ## Thanks to 
