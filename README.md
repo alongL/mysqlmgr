@@ -1,9 +1,15 @@
 # mysqlmgr
 A good c++ wrapper for mysql c API.  It's very easy to use.
+When I  need to access mysql in my program, I find it's boring to join sql string ,and stmt prepare is a little complicated.
+I found it's hard to find a good c++ wrapper for me. 
+
+
 
 
 ## How to use?
 Just include "mysqlmgr.hpp"  to use all the function.
+You can see main.cpp for mor demo.
+main.cpp shows how to use this swiss knife.
 
 
 
@@ -79,7 +85,9 @@ int query()
 
 ## Thanks to 
 [original author ](https://github.com/pstuifzand/mysql-cpp)
+
 [some help](https://github.com/octocat9lee/tools/mysql-cpp/mysqlcpp.h)
+
 [help about stmt](https://github.com/2731381914/mysqlPrepare)
 
 
