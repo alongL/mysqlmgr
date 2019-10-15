@@ -8,7 +8,9 @@ I found it's hard to find a good c++ wrapper for me.
 
 ## How to use?
 Just include "mysqlmgr.hpp"  to use all the function.
-You can see main.cpp for mor demo.
+
+You can see main.cpp for more infomation.
+
 main.cpp shows how to use this swiss knife.
 
 
