@@ -56,10 +56,7 @@ public:
         return !!stmt;
     }
 
-	inline	const char*	geterror()
-	{
-		return mysql_stmt_error(stmt);
-	}
+
 
 	inline	int step()//the same to execute
 	{
@@ -109,12 +106,12 @@ public:
 	}
 
 private:
-    inline	void bind_param(int i, const int& x) 
-	{
+    inline void bind_param(int i, const int& x) 
+    {
         bind_param(i, MYSQL_TYPE_LONG, (char*)&x, 0, 0, 0);
     }
 
-    inline	void bind_param(int i, const std::string& x) 
+    inline void bind_param(int i, const std::string& x) 
 	{
 		const char* c =  x.c_str();
 		bind_param(i, MYSQL_TYPE_STRING, (char*)c, x.size(), 0, &(params[i].buffer_length));
