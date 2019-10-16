@@ -44,7 +44,7 @@ int insert()
 	auto stmt = sqlmgr.getstmt(INSERT_SAMPLE);
 	if (!stmt)
 	{
-		printf("insert error: %s", stmt.geterror());
+		printf("insert error: %s", sqlmgr.geterror());
 		return false;
 	}
 	for (int i = 0; i < 3; i++)
@@ -54,7 +54,7 @@ int insert()
 		stmt.bindstring(1, name);
 		if (stmt.execute())
 		{
-			printf("insert error: %s", stmt.geterror());
+			printf("insert error: %s", sqlmgr.geterror());
 		}
 	}
 	printf("insert sucess.\n");
