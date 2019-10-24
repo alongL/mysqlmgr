@@ -42,7 +42,7 @@ public:
     }
 
     Stmt& operator=(Stmt&& x) 
-	{
+    {
         stmt   = x.stmt;
         count  = x.count;
         params = x.params;
@@ -52,7 +52,8 @@ public:
         return *this;
     }
 
-    operator bool() {
+    operator bool() 
+    {
         return !!stmt;
     }
 
@@ -69,20 +70,21 @@ public:
 		return mysql_stmt_execute(stmt);
 	}
 
-    void bind_param(int i, enum_field_types buffer_type, void* buffer, int buffer_length, my_bool* is_null, long unsigned int* length) 
+    	void bind_param(int i, enum_field_types buffer_type, void* buffer, int buffer_length, my_bool* is_null, long unsigned int* length) 
 	{
 		if (i >= count)
 		{
 			printf("Stmt::bind_param error! index:%d, count:%d \n", i, count);
 			return;
 		}
-        MYSQL_BIND& b   = params[i];
-        b.buffer_type   = buffer_type;
-        b.buffer        = (char*)buffer;
-        b.buffer_length = buffer_length;
-        b.is_null       = is_null;
-        b.length        = length;
-    }
+		MYSQL_BIND& b   = params[i];
+		b.buffer_type   = buffer_type;
+		b.buffer        = (char*)buffer;
+		b.buffer_length = buffer_length;
+		b.is_null       = is_null;
+		b.length        = length;
+   	 }
+	
 	inline	int bindint64(int i, int64_t x)
 	{
 		bind_param(i, MYSQL_TYPE_LONGLONG, (char*)&x, 0, 0, 0);
@@ -234,9 +236,16 @@ private:
 	Mysqlmgr()
 	{
 		handle = mysql_init(0);
+				
+		//https://dev.mysql.com/doc/refman/5.7/en/c-api-auto-reconnect.html
+		//set auto reconnect flag. When mysql restarted, we will auto reconnect
+		my_bool reconnect = 1;
+		mysql_options(handle, MYSQL_OPT_RECONNECT, &reconnect);
 	}
 	MYSQL* handle;
-
+	
+	Mysqlmgr(const Mysqlmgr&) = delete;//no copy
+	Mysqlmgr& operator=(const Mysqlmgr&) = delete;//no assignment
 public:
 	inline static Mysqlmgr& getinstance()
 	{
